@@ -8,9 +8,9 @@ fs.readFile(arg[2], (err, text) => {
         return;
     }
 
-    fs.readFile(arg[3], (err, substring) => {
-        if (err) {
-            console.error(err);
+    fs.readFile(arg[3], (error, substring) => {
+        if (error) {
+            console.error(error);
             return;
         }
 
@@ -27,16 +27,13 @@ fs.readFile(arg[2], (err, text) => {
             return;
         }
 
-        for (let i = 0; i <= text.length - substring.length + 1; i++) {
-            let j = 0;
-
-            while (text[i + j - 1] === substring[j]) {
-                j++;
-                if (j === substring.length) {
-                    console.log(i);
+        for (let i = 0; i <= text.length - substring.length + 1; i++)
+            for (let j = 0; j < substring.length; j++){
+                if (text[i + j] !== substring[j])
                     break;
-                }
+
+                if (j === substring.length - 1)
+                    console.log(i);
             }
-        }
     });
 });
